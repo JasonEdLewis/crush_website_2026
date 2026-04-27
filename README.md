@@ -16,6 +16,7 @@ deployed as plain HTML/CSS/JS to Namecheap shared hosting (cPanel / FTP).
 
 ## What's in this folder
 
+
 ```
 crush_website/
 ├── app/, components/, lib/   # source code
