@@ -62,7 +62,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Headline — uppercase, bold, tight leading (matches screenshot) */}
-                <h1 className="font-display font-bold uppercase tracking-tight leading-[0.88] text-display-2">
+                <h1 className="font-display font-bold uppercase tracking-tight text-display-2">
                   <SplitText
                     as="span"
                     className="block text-ink-50"
@@ -105,11 +105,11 @@ export default function HomePage() {
           {/* header */}
           <div className="mb-12 grid gap-10 md:mb-16 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <p className="h-eyebrow mb-5 flex items-center gap-3">
+              <p className="h-eyebrow mb-10 flex items-center gap-3">
                 <span className="inline-block h-px w-8 bg-ink-400" aria-hidden />
                 Selected Partners
               </p>
-              <h2 className="font-display font-bold uppercase tracking-tight leading-[0.92] text-display-2 text-ink-50">
+              <h2 className="font-display font-bold uppercase tracking-tight text-display-2 text-ink-50">
                 <SplitText className="block">Brands.Trust.</SplitText>
                 <SplitText className="block text-ink-400" delay={250}>
                   and their story.
@@ -150,7 +150,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-8xl">
           <div className="flex items-end justify-between gap-6 mb-12">
             <div>
-              <p className="h-eyebrow mb-4">Selected Work</p>
+              <p className="h-eyebrow mb-10">Selected Work</p>
               <h2 className="font-display font-semibold text-display-2 tracking-tightest">
                 <SplitText stagger={70}>Films we&rsquo;re proud of.</SplitText>
               </h2>
@@ -177,70 +177,13 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          SERVICES PREVIEW — hidden on mobile (lives on /services/)
-         ============================================================ */}
-      <section className="hidden md:block border-t border-white/5 px-6 lg:px-10 py-24 md:py-32 bg-ink-950">
-        <div className="mx-auto max-w-8xl">
-          <div className="grid lg:grid-cols-12 gap-10 mb-14">
-            <div className="lg:col-span-5">
-              <p className="h-eyebrow mb-4">Capabilities</p>
-              <h2 className="font-display font-semibold text-display-2 tracking-tightest">
-                <SplitText stagger={70}>A studio built around the work.</SplitText>
-              </h2>
-            </div>
-            <div className="lg:col-span-7 lg:pt-10">
-              <p className="text-lg text-ink-300 leading-snug max-w-xl">
-                We are a small, senior team. No account managers in the way, no
-                eight-week kick-offs. The people who pitch are the people who
-                shoot, edit, and ship.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s, i) => (
-              <Reveal
-                key={s.number}
-                delay={i * 80}
-                className="group relative border-t border-white/5 lg:border-l lg:[&:nth-child(3n+1)]:border-l-0 md:[&:nth-child(2n+1)]:border-l-0 lg:[&:nth-child(2n+1)]:border-l p-8 lg:p-10 hover:bg-white/[0.02] transition-colors"
-              >
-                <p className="font-display text-sm text-ink-500">{s.number}</p>
-                <h3 className="mt-3 font-display font-semibold text-2xl md:text-3xl tracking-tighter">
-                  {s.title}
-                </h3>
-                <p className="mt-4 text-ink-300 text-[0.95rem] leading-relaxed">
-                  {s.blurb}
-                </p>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {s.capabilities.map((c) => (
-                    <li
-                      key={c}
-                      className="text-xs text-ink-400 border border-white/10 rounded-full px-3 py-1"
-                    >
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-14">
-            <Link href="/services/" className="btn btn-ghost">
-              See all services <span aria-hidden>→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
           APPROACH — hidden on mobile (lives on /about/ + /services/)
          ============================================================ */}
       <section className="hidden md:block border-t border-white/5 px-6 lg:px-10 py-24 md:py-32">
         <div className="mx-auto max-w-8xl">
           <div className="grid lg:grid-cols-12 gap-10 mb-14">
             <div className="lg:col-span-5">
-              <p className="h-eyebrow mb-4">Approach</p>
+              <p className="h-eyebrow mb-10">Approach</p>
               <h2 className="font-display font-semibold text-display-2 tracking-tightest">
                 <SplitText stagger={70}>How we make films.</SplitText>
               </h2>
@@ -287,7 +230,7 @@ export default function HomePage() {
           <Reveal>
             <p className="h-eyebrow mb-8 justify-center">Let&rsquo;s make something</p>
           </Reveal>
-          <h2 className="font-display font-semibold text-display-2 md:text-display-1 tracking-tightest leading-[0.95]">
+          <h2 className="font-display font-semibold text-display-2 md:text-display-1 tracking-tightest">
             <SplitText stagger={80} className="block">
               Got a story
             </SplitText>{' '}
@@ -298,7 +241,7 @@ export default function HomePage() {
           <Reveal delay={300}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact/" className="btn btn-primary">
-                Start a project →
+                Start a project
               </Link>
               <Link href="/work/" className="btn btn-ghost">
                 See the work

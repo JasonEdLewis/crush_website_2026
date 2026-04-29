@@ -11,7 +11,8 @@ export type SocialKey =
   | 'vimeo'
   | 'youtube'
   | 'facebook'
-  | 'linkedin';
+  | 'linkedin'
+  | 'cross';
 
 const STROKE: SVGProps<SVGSVGElement> = {
   fill: 'none',
@@ -65,6 +66,14 @@ export default function SocialIcon({
       return (
         <svg viewBox="0 0 24 24" className={className} {...FILL} {...rest} aria-hidden>
           <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.66h-3.55V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.27V1.72C24 .77 23.21 0 22.22 0z" />
+        </svg>
+      );
+
+    case 'cross':
+      // solid latin cross — matches the Font Awesome / Web Awesome `cross` glyph
+      return (
+        <svg viewBox="0 0 384 512" className={className} {...FILL} {...rest} aria-hidden>
+          <path d="M176 0c-17.7 0-32 14.3-32 32v96H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32h112v224c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V256h112c17.7 0 32-14.3 32-32v-64c0-17.7-14.3-32-32-32H240V32c0-17.7-14.3-32-32-32h-32z" />
         </svg>
       );
   }

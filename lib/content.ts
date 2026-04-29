@@ -9,7 +9,7 @@ export const SITE = {
   tagline: 'Visuals for the next level.',
   promise:
     'A production studio for commercial, brand, and documentary work — built for teams who want their story to land, not just play.',
-  email: 'merrickrobertmedia@gmail.com',
+  email: 'info@merrickrobertmedia.com',
   phone: '', // hidden until a public number is provided
   studio: {
     line1: 'Production Studio',
@@ -50,7 +50,7 @@ export const SERVICES: Service[] = [
     title: 'Commercial Production',
     blurb:
       'High-craft commercials engineered for the metric you actually care about — not just the award reel.',
-    capabilities: ['Concept + script', 'Direction', 'Cinematography', 'Edit + finish'],
+    capabilities: ['Concept + script', 'Direction', 'Cinematography', 'Edit + finish','ariel cinematography', '360/VR capture', 'CGI + VFX'],
   },
   {
     number: '02',
@@ -71,21 +71,29 @@ export const SERVICES: Service[] = [
     title: 'Content Systems',
     blurb:
       'One shoot, ten months of content. We build production systems so your team ships consistently.',
-    capabilities: ['Content strategy', 'Modular shoot days', 'Edit pipelines', 'Asset management'],
+    capabilities: ['Content strategy', 'Modular shoot days', 'Edit pipelines', 'Asset management', 'Behind the scenes capture'],
   },
+
   {
     number: '05',
-    title: 'Post-Production',
-    blurb:
-      'Edit, color, sound, and finish for projects that need a pair of hands at the end of the line.',
-    capabilities: ['Story-first editing', 'Color grade', 'Sound design + mix', 'Deliverables'],
-  },
-  {
-    number: '06',
     title: 'Live + Event Capture',
     blurb:
       'Multi-cam live capture and same-week social cut-downs — built for keynotes, launches, and gatherings.',
     capabilities: ['Multi-cam direction', 'Live switching', 'Same-day edits', 'Vertical + horizontal'],
+  },
+  {
+    number: '06',
+    title: 'Photography',
+    blurb:
+      'Capture the moments that matter with a photographer who understands how stills and video work together to tell your story.',
+    capabilities: ["Portraits + headshots", "Event photography", "Product photography", "Lifestyle photography"],
+  },
+  {
+    number: '07',
+    title: 'Post-Production',
+    blurb:
+      'Edit, color, sound, and finish for projects that need a pair of hands at the end of the line.',
+    capabilities: ['Story-first editing', 'Color grade', 'Sound design + mix', 'Deliverables'],
   },
 ];
 
@@ -198,14 +206,14 @@ export const BRANDS: Brand[] = [
   { name: 'Winston-Salem Fashion Week' },
   { name: 'AARP' },
   { name: 'The Ayars Agency' },
-  { name: 'Men That Win',                    location: 'NC' },
-  { name: 'JC Cosmetics',                    location: 'NC' },
-  { name: 'Color Of Medicine',               location: 'NC' },
-  { name: 'Goldson Family Services',         location: 'NC' },
-  { name: 'Palm Beach Lounge',               location: 'Atlanta' },
-  { name: 'Athora Care',                     location: 'NC' },
-  { name: 'Caring Hands Home Care',          location: 'NC' },
-  { name: 'The Elijah Rock Foundation',      location: 'Iowa' },
+  { name: 'Men That Win',                    },
+  { name: 'JC Cosmetics',                    },
+  { name: 'Color Of Medicine',               },
+  { name: 'Goldson Family Services',         },
+  { name: 'Palm Beach Lounge',               },
+  { name: 'Athora Care',                     },
+  { name: 'Caring Hands Home Care',          },
+  { name: 'The Elijah Rock Foundation',},
 ];
 
 /** Backwards-compat: footer marquee + any other consumers that just need names. */

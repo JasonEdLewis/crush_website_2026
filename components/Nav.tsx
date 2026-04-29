@@ -36,9 +36,16 @@ export default function Nav() {
               <span className="link-underline">{item.label}</span>
             </Link>
           ))}
-          <Link href="/contact/" className="btn btn-primary text-sm">
-            Start a project
-            <span aria-hidden>→</span>
+          <Link
+            href="/contact/"
+            className="group inline-flex items-center gap-1.5 text-sm text-crush-500 hover:text-crush-400 transition-colors duration-300"
+          >
+            <span className="link-underline">Start a project</span>
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-500 ease-out-quint group-hover:translate-x-1"
+            >
+            </span>
           </Link>
         </nav>
 
@@ -87,9 +94,14 @@ export default function Nav() {
           <Link
             href="/contact/"
             onClick={() => setOpen(false)}
-            className="btn btn-primary self-start mt-2"
+            className="group inline-flex items-center gap-2 self-start mt-2 font-display text-2xl tracking-tighter text-crush-500 hover:text-crush-400 transition-colors duration-300"
           >
-            Start a project →
+            <span className="link-underline">Start a project</span>
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-500 ease-out-quint group-hover:translate-x-1"
+            >
+            </span>
           </Link>
         </nav>
       </div>

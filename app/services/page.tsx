@@ -29,7 +29,7 @@ export default function ServicesPage() {
             </p>
           </Reveal>
           <Parallax speed={-0.1}>
-            <h1 className="font-display font-semibold text-display-1 tracking-tightest leading-[0.92] max-w-5xl">
+            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-5xl">
               <SplitText immediate delay={120} stagger={75}>One studio.</SplitText>{' '}
               <SplitText immediate delay={400} stagger={75} className="text-ink-400">
                 Six ways
@@ -100,7 +100,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-8xl">
           <div className="grid lg:grid-cols-12 gap-10 mb-14">
             <div className="lg:col-span-5">
-              <p className="h-eyebrow mb-4">Process</p>
+              <p className="h-eyebrow mb-10">Process</p>
               <h2 className="font-display font-semibold text-display-2 tracking-tightest">
                 A loop, not a&nbsp;ladder.
               </h2>
@@ -151,7 +151,7 @@ export default function ServicesPage() {
           <Reveal delay={240}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact/" className="btn btn-primary">
-                Start a project →
+                Start a project
               </Link>
               <Link href="/work/" className="btn btn-ghost">
                 See the work

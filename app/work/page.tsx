@@ -25,7 +25,7 @@ export default function WorkPage() {
             </p>
           </Reveal>
           <Parallax speed={-0.1}>
-            <h1 className="font-display font-semibold text-display-1 tracking-tightest leading-[0.92] max-w-5xl">
+            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-5xl">
               <SplitText immediate delay={120} stagger={75}>Films built to</SplitText>{' '}
               <SplitText immediate delay={350} stagger={75} className="text-ink-400">
                 earn attention,
@@ -59,37 +59,7 @@ export default function WorkPage() {
           ))}
         </div>
       </section>
-
-      {/* index strip */}
-      <section className="border-t border-white/5 px-6 lg:px-10 py-20 bg-ink-950">
-        <div className="mx-auto max-w-8xl">
-          <p className="h-eyebrow mb-8">Index</p>
-          <ul className="divide-y divide-white/5 border-y border-white/5">
-            {WORK.map((w) => (
-              <li
-                key={w.slug}
-                className="group grid grid-cols-12 items-baseline py-5 gap-4 hover:bg-white/[0.02] transition-colors px-2"
-              >
-                <span className="col-span-2 md:col-span-1 font-display text-sm text-ink-500">
-                  {w.year}
-                </span>
-                <span className="col-span-10 md:col-span-5 font-display text-lg md:text-xl tracking-tighter">
-                  {w.client}
-                </span>
-                <span className="col-span-12 md:col-span-4 text-ink-400 text-sm">
-                  {w.category}
-                </span>
-                <a
-                  href={`#${w.slug}`}
-                  className="col-span-12 md:col-span-2 text-sm text-ink-400 group-hover:text-ink-50 transition-colors md:text-right"
-                >
-                  Jump to film →
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+     
     </>
   );
 }

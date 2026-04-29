@@ -62,7 +62,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Parallax speed={-0.1}>
-            <h1 className="font-display font-semibold text-display-1 tracking-tightest leading-[0.92] max-w-6xl">
+            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-6xl">
               <SplitText immediate delay={120} stagger={60}>
                 We make films like a product team —
               </SplitText>{' '}
@@ -78,7 +78,7 @@ export default function AboutPage() {
       <section className="px-6 lg:px-10 py-20 md:py-28">
         <div className="mx-auto max-w-8xl grid lg:grid-cols-12 gap-12 lg:gap-20">
           <Reveal className="lg:col-span-5">
-            <p className="h-eyebrow mb-6">Origin</p>
+            <p className="h-eyebrow mb-10">Origin</p>
             <h2 className="font-display font-semibold text-display-3 tracking-tightest leading-[1.05]">
               Built in Atlanta. Shot wherever the&nbsp;story&nbsp;is.
             </h2>
@@ -124,7 +124,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-8xl">
           <div className="grid lg:grid-cols-12 gap-10 mb-14">
             <div className="lg:col-span-5">
-              <p className="h-eyebrow mb-4">Team</p>
+              <p className="h-eyebrow mb-10">Team</p>
               <h2 className="font-display font-semibold text-display-2 tracking-tightest">
                 Small studio. <span className="text-ink-400">Senior bench.</span>
               </h2>
@@ -165,7 +165,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-8xl">
           <div className="grid lg:grid-cols-12 gap-10 mb-14">
             <div className="lg:col-span-5">
-              <p className="h-eyebrow mb-4">Principles</p>
+              <p className="h-eyebrow mb-10">Principles</p>
               <h2 className="font-display font-semibold text-display-2 tracking-tightest">
                 What we believe about&nbsp;film.
               </h2>

@@ -56,7 +56,12 @@ export default function Parallax({
 
     const apply = () => {
       tickingRef.current = false;
-      const dy = (window.scrollY - restRef.current + window.innerHeight) * speed;
+      // Anchor at rest: dy must be 0 when the element is at its natural
+      // position. Adding window.innerHeight here (the previous behavior)
+      // pre-shifted the element by innerHeight * speed on first paint —
+      // for a hero at the top of the page that meant the H1 spawned ~80px
+      // above its layout slot and overlapped the eyebrow above it.
+      const dy = (window.scrollY - restRef.current) * speed;
       const clamped = max != null ? Math.max(-max, Math.min(max, dy)) : dy;
       el.style.transform = `translate3d(0, ${clamped.toFixed(2)}px, 0)`;
     };

@@ -65,6 +65,22 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              {/* Mobile-only entry point to /faith — desktop has the discrete text link below. */}
+              <li className="md:hidden">
+                <Link
+                  href="/faith/"
+                  aria-label="Faith-Based Production"
+                  title="Faith-Based Production"
+                  className="
+                    group inline-flex h-10 w-10 items-center justify-center
+                    rounded-full border border-white/10 text-ink-300
+                    transition-all duration-500 ease-out-quint
+                    hover:border-crush-500 hover:text-crush-500 hover:-translate-y-0.5
+                  "
+                >
+                  <SocialIcon name="cross" className="h-[18px] w-[18px]" />
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -72,7 +88,15 @@ export default function Footer() {
         {/* Copyright + tagline — desktop only */}
         <div className="hidden md:flex mx-auto max-w-8xl mt-16 pt-8 border-t border-white/5 flex-wrap items-center justify-between gap-4 text-xs text-ink-500">
           <p>© {year} {SITE.legalName}. All rights reserved.</p>
-          <p>Built lean. Hosted static.</p>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/faith/"
+              className="text-ink-500 hover:text-ink-300 transition"
+            >
+              Faith-Based Production
+            </Link>
+            <p>Built lean. Hosted static.</p>
+          </div>
         </div>
       </div>
     </footer>

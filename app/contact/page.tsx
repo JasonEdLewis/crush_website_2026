@@ -3,6 +3,7 @@ import Reveal from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import Parallax from '@/components/Parallax';
 import { SITE } from '@/lib/content';
+import SocialIcon, { type SocialKey } from '@/components/SocialIcon';
 
 export const metadata: Metadata = {
   title: 'Contact — Crush Films',
@@ -38,7 +39,7 @@ export default function ContactPage() {
             </p>
           </Reveal>
           <Parallax speed={-0.1}>
-            <h1 className="font-display font-semibold text-display-1 tracking-tightest leading-[0.92] max-w-5xl">
+            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-5xl">
               <SplitText immediate delay={120} stagger={75}>Tell us about it.</SplitText>{' '}
               <SplitText immediate delay={500} stagger={75} className="text-ink-400">
                 Even a sentence is enough.
@@ -60,14 +61,28 @@ export default function ContactPage() {
           {/* form */}
           <Reveal className="lg:col-span-7">
             <form
-              action={`mailto:${SITE.email}`}
+              action="/contact.php"
               method="post"
-              encType="text/plain"
               className="space-y-8"
             >
+              {/* honeypot — real users leave this empty; bots fill it. */}
+              <div aria-hidden className="hidden" style={{ position: 'absolute', left: '-9999px' }}>
+                <label>
+                  Website
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
+
               <Field label="Your name" name="name" required />
               <Field label="Email" name="email" type="email" required />
               <Field label="Company / brand" name="company" />
+              <Field
+                label="What are you trying to do?"
+                name="brief"
+                multiline
+                required
+                placeholder="One paragraph is plenty. We'll come back with questions."
+              />
 
               <Fieldset legend="What kind of project?">
                 <div className="flex flex-wrap gap-2">
@@ -78,7 +93,7 @@ export default function ContactPage() {
                     >
                       <input
                         type="checkbox"
-                        name="service"
+                        name="service[]"
                         value={opt}
                         className="sr-only"
                       />
@@ -102,26 +117,19 @@ export default function ContactPage() {
                 </div>
               </Fieldset>
 
-              <Field
-                label="What are you trying to do?"
-                name="brief"
-                multiline
-                placeholder="One paragraph is plenty. We'll come back with questions."
-              />
-
               <div className="pt-4 flex flex-wrap items-center gap-4">
                 <button type="submit" className="btn btn-primary">
                   Send brief →
                 </button>
                 <p className="text-xs text-ink-500">
-                  Submitting opens your mail client with a pre-filled message.
+                  We typically reply within two business days.
                 </p>
               </div>
             </form>
           </Reveal>
 
-          {/* side info */}
-          <Reveal className="lg:col-span-5" delay={150}>
+          {/* side info — hidden on phone; shown from tablet up */}
+          <Reveal className="hidden md:block lg:col-span-5" delay={150}>
             <div className="space-y-12">
               <div>
                 <p className="h-eyebrow mb-3">Direct</p>
@@ -154,16 +162,23 @@ export default function ContactPage() {
 
               <div>
                 <p className="h-eyebrow mb-3">Elsewhere</p>
-                <ul className="space-y-2">
+                <ul className="flex flex-wrap items-center gap-2">
                   {SITE.social.map((s) => (
                     <li key={s.label}>
                       <a
                         href={s.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-ink-200 hover:text-ink-50 transition link-underline"
+                        aria-label={s.label}
+                        title={s.label}
+                        className="
+                          group inline-flex h-10 w-10 items-center justify-center
+                          rounded-full border border-white/10 text-ink-300
+                          transition-all duration-500 ease-out-quint
+                          hover:border-crush-500 hover:text-crush-500 hover:-translate-y-0.5
+                        "
                       >
-                        {s.label} <span aria-hidden>↗</span>
+                        <SocialIcon name={s.icon as SocialKey} className="h-[18px] w-[18px]" />
                       </a>
                     </li>
                   ))}

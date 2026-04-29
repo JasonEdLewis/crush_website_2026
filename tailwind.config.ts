@@ -43,9 +43,9 @@ const config: Config = {
       },
       fontSize: {
         // big display sizes used in heros / section heads
-        'display-1': ['clamp(3rem, 9vw, 8.5rem)',  { lineHeight: '0.92', letterSpacing: '-0.04em' }],
-        'display-2': ['clamp(2.25rem, 6vw, 5rem)', { lineHeight: '0.95', letterSpacing: '-0.035em' }],
-        'display-3': ['clamp(1.75rem, 4vw, 3rem)', { lineHeight: '1.0',  letterSpacing: '-0.03em' }],
+        'display-1': ['clamp(2.5rem, 6.5vw, 6rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
+        'display-2': ['clamp(2rem, 5vw, 4rem)',     { lineHeight: '1.04', letterSpacing: '-0.03em'  }],
+        'display-3': ['clamp(1.5rem, 3.5vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.025em' }],
       },
       maxWidth: {
         '8xl': '88rem',

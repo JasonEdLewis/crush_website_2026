@@ -10,7 +10,7 @@ export default function NotFound() {
       />
       <div className="relative mx-auto max-w-3xl text-center">
         <p className="h-eyebrow mb-8 justify-center">Error 404</p>
-        <h1 className="font-display font-semibold text-display-1 tracking-tightest leading-[0.92]">
+        <h1 className="font-display font-semibold text-display-1 tracking-tightest">
           Cut. <span className="text-ink-400">This take doesn&rsquo;t exist.</span>
         </h1>
         <p className="mt-8 text-ink-300">
