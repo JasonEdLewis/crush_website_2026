@@ -1,141 +1,155 @@
+'use client';
+
 import Link from 'next/link';
 import type { Brand } from '@/lib/content';
 
 type Props = {
   brands: Brand[];
   className?: string;
+  /** Currently-hovered brand. When set, every other tile fades out. */
+  activeBrand?: Brand | null;
+  /** Called whenever a brand tile is hovered/focused (cleared on mouse leave). */
+  onActiveChange?: (brand: Brand | null) => void;
 };
 
 /**
- * Credibility-focused brand grid (replaces the earlier marquee).
+ * Auto-scrolling brand strip.
  *
- * - Uniform aspect-ratio tiles in a responsive grid (2 → 3 → 4 cols).
- * - Each tile carries the brand name + an optional location chip.
- * - Logos can be dropped in per-brand via the `logo` field on Brand.
- * - The final tile is a "Your brand here →" CTA that links to /contact/.
- * - Hover state lights up the tile borders + reveals a crush-red accent
- *   so the wall feels alive without being noisy.
+ * Logos render natively (no grayscale/opacity tint). Hover state is
+ * forwarded to the parent via `onActiveChange` so an enclosing section can
+ * react — e.g. swap its own background to the hovered brand's video.
+ *
+ * Active state is cleared on `onMouseLeave` of the strip wrapper (not each
+ * tile), so moving between adjacent tiles updates without an off/on flicker.
  */
-export default function BrandWall({ brands, className = '' }: Props) {
-  return (
-    <ul
-      className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 ${className}`}
-      aria-label="Brands we've worked with"
-    >
-      {brands.map((b) => (
-        <li key={b.name}>
-          <BrandTile brand={b} />
-        </li>
-      ))}
-      <li>
-        <CTATile />
-      </li>
-    </ul>
-  );
-}
-
-/* ----------------------------- tiles ----------------------------- */
-
-function BrandTile({ brand }: { brand: Brand }) {
+export default function BrandWall({
+  brands,
+  className = '',
+  activeBrand,
+  onActiveChange,
+}: Props) {
   return (
     <div
-      className="
-        group relative aspect-[3/2] overflow-hidden rounded-xl
-        border border-white/5 bg-ink-900/60 backdrop-blur-sm
-        transition-all duration-500 ease-out-quint
-        hover:border-white/20 hover:bg-white/[0.03]
-      "
+      className={`relative w-full overflow-hidden ${className}`}
+      aria-label="Brands we've worked with"
+      onMouseLeave={() => onActiveChange?.(null)}
     >
-      {/* hover accent — soft crush glow from corner */}
+      {/* edge fade masks — hide the loop seam. They use the section's flat
+          ink-950 color, so they read as dark "shadow" bands when a brand
+          video takes over the section background. Fade them out while a
+          brand is active. */}
       <div
         aria-hidden
-        className="
-          pointer-events-none absolute inset-0
-          bg-gradient-to-br from-crush-500/0 via-transparent to-crush-500/0
-          opacity-0 transition-opacity duration-700
-          group-hover:opacity-100 group-hover:from-crush-500/15 group-hover:to-transparent
-        "
+        className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-28 bg-gradient-to-r from-ink-950 to-transparent transition-opacity duration-500 ${activeBrand ? 'opacity-0' : 'opacity-100'}`}
       />
-
-      {/* location chip top-right */}
-      {brand.location ? (
-        <span
-          className="
-            absolute right-3 top-3 z-10
-            rounded-full border border-white/10 px-2 py-0.5
-            text-[9px] uppercase tracking-[0.2em]
-            text-ink-400 transition-colors duration-500
-            group-hover:border-crush-500/60 group-hover:text-crush-500
-          "
-        >
-          {brand.location}
-        </span>
-      ) : null}
-
-      {/* brand mark — image if provided, wordmark fallback otherwise */}
-      <div className="relative flex h-full items-center justify-center px-5 py-6">
-        {brand.logo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={brand.logo}
-            alt={brand.name}
-            draggable={false}
-            className="
-              h-10 md:h-12 w-auto max-w-full object-contain
-              opacity-75 grayscale transition-all duration-500
-              group-hover:opacity-100 group-hover:grayscale-0
-            "
-          />
-        ) : (
-          <span
-            className="
-              text-center font-display font-bold
-              text-[15px] md:text-base lg:text-lg
-              leading-[1.05] tracking-tight uppercase
-              text-ink-200 transition-colors duration-500
-              group-hover:text-ink-50
-            "
-          >
-            {brand.name}
-          </span>
-        )}
-      </div>
-
-      {/* bottom hairline that draws in on hover */}
-      <span
+      <div
         aria-hidden
-        className="
-          pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left
-          scale-x-0 bg-crush-500 transition-transform duration-700 ease-out-quint
-          group-hover:scale-x-100
-        "
+        className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-28 bg-gradient-to-l from-ink-950 to-transparent transition-opacity duration-500 ${activeBrand ? 'opacity-0' : 'opacity-100'}`}
       />
+
+      <ul className="marquee-track items-stretch gap-3 md:gap-4 py-1 [&:hover]:[animation-play-state:paused]">
+        <Tiles brands={brands} activeBrand={activeBrand} onHover={onActiveChange} />
+        <Tiles brands={brands} activeBrand={activeBrand} ariaHidden onHover={onActiveChange} />
+      </ul>
     </div>
   );
 }
 
-function CTATile() {
+/* ----------------------------- track contents ----------------------------- */
+
+function Tiles({
+  brands,
+  activeBrand,
+  ariaHidden = false,
+  onHover,
+}: {
+  brands: Brand[];
+  activeBrand?: Brand | null;
+  ariaHidden?: boolean;
+  onHover?: (brand: Brand | null) => void;
+}) {
+  const hasActive = !!activeBrand;
+  return (
+    <>
+      {brands.map((b, i) => (
+        <li
+          key={`${b.name}-${i}`}
+          className="shrink-0 h-28 md:h-36 w-[200px] sm:w-[220px] md:w-[260px]"
+          aria-hidden={ariaHidden || undefined}
+        >
+          <BrandTile
+            brand={b}
+            onHover={onHover}
+            dimmed={hasActive}
+          />
+        </li>
+      ))}
+      <li
+        className="shrink-0 h-28 md:h-36 w-[200px] sm:w-[220px] md:w-[260px]"
+        aria-hidden={ariaHidden || undefined}
+      >
+        <CTATile dimmed={hasActive} />
+      </li>
+    </>
+  );
+}
+
+/* --------------------------------- tiles --------------------------------- */
+
+function BrandTile({
+  brand,
+  onHover,
+  dimmed = false,
+}: {
+  brand: Brand;
+  onHover?: (b: Brand | null) => void;
+  dimmed?: boolean;
+}) {
+  return (
+    <div
+      className={`group relative flex h-full items-center justify-center px-3 transition-opacity duration-300 ${dimmed ? 'opacity-0' : 'opacity-100'}`}
+      onMouseEnter={() => brand.vimeoId && onHover?.(brand)}
+      onFocus={() => brand.vimeoId && onHover?.(brand)}
+    >
+      {brand.logo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={brand.logo}
+          alt={brand.name}
+          draggable={false}
+          className="h-16 md:h-24 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+        />
+      ) : (
+        <span
+          className="
+            text-center font-display font-bold uppercase
+            text-base md:text-lg leading-[1.05] tracking-tight
+            text-ink-200 transition-colors duration-500
+            group-hover:text-ink-50
+          "
+        >
+          {brand.name}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function CTATile({ dimmed = false }: { dimmed?: boolean }) {
   return (
     <Link
       href="/contact/"
-      className="
-        group relative flex aspect-[3/2] items-center justify-center
-        overflow-hidden rounded-xl border border-dashed border-white/15
-        bg-transparent transition-all duration-500 ease-out-quint
-        hover:border-solid hover:border-crush-500 hover:bg-crush-500
-      "
+      className={`group flex h-full items-center justify-center px-3 transition-opacity duration-300 ${dimmed ? 'opacity-0' : 'opacity-100'}`}
     >
       <span
         className="
-          relative z-10 text-center font-display font-bold uppercase
-          text-[15px] md:text-base lg:text-lg leading-[1.05] tracking-tight
+          text-center font-display font-bold uppercase
+          text-base md:text-lg leading-[1.05] tracking-tight
           text-ink-300 transition-colors duration-500
-          group-hover:text-ink-950
+          group-hover:text-crush-500
         "
       >
-        Your brand
-        <br />
-        here <span aria-hidden>→</span>
+        Your brand here <span aria-hidden>→</span>
       </span>
     </Link>
   );

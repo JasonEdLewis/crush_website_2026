@@ -4,7 +4,7 @@
 // updating copy is a one-file job.
 
 export const SITE = {
-  name: 'Crush Films',
+  name: 'Crushfilms',
   legalName: 'Merrick Robert Media LLC',
   tagline: 'Visuals for the next level.',
   promise:
@@ -15,7 +15,7 @@ export const SITE = {
     line1: 'Production Studio',
     line2: 'Atlanta, GA',
   },
-  // Authentic public profiles run by Merrick Ward / Crush Films.
+  // Authentic public profiles run by Merrick Ward / Crushfilms.
   // `icon` is a key in components/SocialIcon.tsx — keep them in sync.
   social: [
     { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/crushfilms/' },
@@ -42,6 +42,9 @@ export type Service = {
   title: string;
   blurb: string;
   capabilities: string[];
+  /** Optional Vimeo id — when set, the services page renders an autoplay
+   *  preview embed beneath the row's title. */
+  vimeoId?: string;
 };
 
 export const SERVICES: Service[] = [
@@ -65,6 +68,7 @@ export const SERVICES: Service[] = [
     blurb:
       'Honest, character-led films for nonprofits, founders, and initiatives worth witnessing — start to finish.',
     capabilities: ['Research + access', 'Vérité direction', 'Original score', 'Festival-grade post'],
+    vimeoId: '1189619585',
   },
   {
     number: '04',
@@ -72,6 +76,7 @@ export const SERVICES: Service[] = [
     blurb:
       'One shoot, ten months of content. We build production systems so your team ships consistently.',
     capabilities: ['Content strategy', 'Modular shoot days', 'Edit pipelines', 'Asset management', 'Behind the scenes capture'],
+    vimeoId: '1189600869',
   },
 
   {
@@ -80,6 +85,7 @@ export const SERVICES: Service[] = [
     blurb:
       'Multi-cam live capture and same-week social cut-downs — built for keynotes, launches, and gatherings.',
     capabilities: ['Multi-cam direction', 'Live switching', 'Same-day edits', 'Vertical + horizontal'],
+    vimeoId: '1189950990',
   },
   {
     number: '06',
@@ -112,7 +118,7 @@ export type CaseStudy = {
   // OPTIONAL: drop in a Vimeo video id (digits only — e.g. "492156331")
   // and the PosterCard will render the real embed + a link to vimeo.com.
   // Leave undefined to fall back to the gradient placeholder + a link to the
-  // Crush Films Vimeo profile.
+  // Crushfilms Vimeo profile.
   vimeoId?: string;
   // OPTIONAL: external watch URL override; when provided, takes precedence
   // over the auto-generated vimeo.com/<id> link.
@@ -198,22 +204,24 @@ export type Brand = {
   logo?: string;
   /** Optional location tag rendered in the wordmark fallback. */
   location?: string;
+  /** Optional Vimeo id — shown in a hover card on the brand carousel. */
+  vimeoId?: string;
 };
 
 export const BRANDS: Brand[] = [
-  { name: 'Hanes Brands' },
-  { name: 'G Davis Productions and Films' },
-  { name: 'Winston-Salem Fashion Week' },
-  { name: 'AARP' },
-  { name: 'The Ayars Agency' },
-  { name: 'Men That Win',                    },
-  { name: 'JC Cosmetics',                    },
-  { name: 'Color Of Medicine',               },
-  { name: 'Goldson Family Services',         },
-  { name: 'Palm Beach Lounge',               },
-  { name: 'Athora Care',                     },
-  { name: 'Caring Hands Home Care',          },
-  { name: 'The Elijah Rock Foundation',},
+  { name: 'Hanes Brands',                logo: '/logos/brands/HANES_BRAND.png',       vimeoId: '1143187919' },
+  { name: 'AARP',                        logo: '/logos/brands/AARP.png' },
+  { name: 'Winston-Salem Fashion Week',  logo: '/logos/brands/WSFW.png',              vimeoId: '1162412870' },
+  { name: 'The Ayars Agency',            logo: '/logos/brands/AYARS_AGENCY.png',      vimeoId: '1129696793' },
+  { name: 'Color Of Medicine',           logo: '/logos/brands/COLOR_OF_MEDICINE.png' },
+  { name: 'Athora Care',                 logo: '/logos/brands/AUTHORA_CARE.png' },
+  { name: 'The Elijah Rock Foundation',  logo: '/logos/brands/ELIJAH_FOUNDATION.png' },
+  { name: 'Alpha Style',                 logo: '/logos/brands/ALPHA_STYLE.png' },
+  { name: "Alzheimer's Association",     logo: '/logos/brands/ALZHEIMERS.png' },
+  { name: 'DesignPlus',                  logo: '/logos/brands/DESIGNPLUS.png',        vimeoId: '1126369059' },
+  { name: 'Goodwill',                    logo: '/logos/brands/GOODWILL.png',          vimeoId: '1188678553' },
+  { name: 'Life Lemons',                 logo: '/logos/brands/LIFE_LEMONS.png' },
+  { name: 'YMCA',                        logo: '/logos/brands/YMCA.png',              vimeoId: '1188735824' },
 ];
 
 /** Backwards-compat: footer marquee + any other consumers that just need names. */

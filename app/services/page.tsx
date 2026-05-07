@@ -3,10 +3,11 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import Parallax from '@/components/Parallax';
-import { SERVICES, APPROACH } from '@/lib/content';
+import VideoServiceRow from '@/components/VideoServiceRow';
+import { SERVICES, APPROACH, type Service } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Services — Crush Films',
+  title: 'Services — Crushfilms',
   description:
     'Commercial production, brand films, documentary, content systems, post-production, and live capture.',
 };
@@ -32,7 +33,7 @@ export default function ServicesPage() {
             <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-5xl">
               <SplitText immediate delay={120} stagger={75}>One studio.</SplitText>{' '}
               <SplitText immediate delay={400} stagger={75} className="text-ink-400">
-                Six ways
+                Seven ways
               </SplitText>{' '}
               <SplitText immediate delay={620} stagger={75}>to ship.</SplitText>
             </h1>
@@ -46,52 +47,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* services list — large, editorial rows */}
+      {/* services list — editorial rows for text-only services,
+          cinematic full-bleed cards for services with a vimeoId */}
       <section className="px-6 lg:px-10 py-12 md:py-20">
         <div className="mx-auto max-w-8xl divide-y divide-white/5 border-y border-white/5">
-          {SERVICES.map((s, i) => (
-            <Reveal
-              key={s.number}
-              delay={i * 60}
-              className="group grid grid-cols-12 gap-6 md:gap-10 py-10 md:py-14 hover:bg-white/[0.02] transition-colors px-2 md:px-4"
-            >
-              <div className="col-span-12 md:col-span-1 font-display text-sm text-ink-500">
-                {s.number}
-              </div>
-
-              <div className="col-span-12 md:col-span-5">
-                <h2 className="font-display font-semibold text-3xl md:text-5xl tracking-tightest leading-[1.0] group-hover:text-crush-500 transition-colors duration-700">
-                  {s.title}
-                </h2>
-              </div>
-
-              <div className="col-span-12 md:col-span-6 lg:col-span-5 lg:col-start-7 md:pt-2">
-                <p className="text-ink-300 text-[1.05rem] leading-relaxed">
-                  {s.blurb}
-                </p>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {s.capabilities.map((c) => (
-                    <li
-                      key={c}
-                      className="text-xs text-ink-400 border border-white/10 rounded-full px-3 py-1"
-                    >
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="hidden lg:flex col-span-1 items-start justify-end pt-3">
-                <Link
-                  href="/contact/"
-                  aria-label={`Start a ${s.title} project`}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-ink-300 transition-all duration-500 group-hover:bg-ink-50 group-hover:text-ink-950 group-hover:rotate-[-45deg]"
-                >
-                  →
-                </Link>
-              </div>
-            </Reveal>
-          ))}
+          {SERVICES.map((s, i) =>
+            s.vimeoId ? (
+              <VideoServiceRow key={s.number} service={s} index={i} />
+            ) : (
+              <TextServiceRow key={s.number} service={s} index={i} />
+            ),
+          )}
         </div>
       </section>
 
@@ -163,3 +129,39 @@ export default function ServicesPage() {
     </>
   );
 }
+
+/* ----------------------------- service rows ----------------------------- */
+
+/**
+ * Editorial row used for services WITHOUT a video.
+ * Title on the left, blurb + capability pills on the right.
+ */
+function TextServiceRow({ service: s, index: i }: { service: Service; index: number }) {
+  return (
+    <Reveal
+      delay={i * 60}
+      className="group grid grid-cols-12 gap-6 md:gap-10 py-10 md:py-14 hover:bg-white/[0.02] transition-colors px-2 md:px-4"
+    >
+      <div className="col-span-12 md:col-span-6">
+        <h2 className="font-display font-semibold text-3xl md:text-5xl tracking-tightest leading-[1.0] group-hover:text-crush-500 transition-colors duration-700">
+          {s.title}
+        </h2>
+      </div>
+
+      <div className="col-span-12 md:col-span-6 lg:col-span-5 lg:col-start-7 md:pt-2">
+        <p className="text-ink-300 text-[1.05rem] leading-relaxed">{s.blurb}</p>
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {s.capabilities.map((c) => (
+            <li
+              key={c}
+              className="text-xs text-ink-400 border border-white/10 rounded-full px-3 py-1"
+            >
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Reveal>
+  );
+}
+

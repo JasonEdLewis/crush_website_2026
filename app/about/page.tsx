@@ -6,9 +6,9 @@ import Parallax from '@/components/Parallax';
 import { STUDIO_FACTS, SITE } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'About — Crush Films',
+  title: 'About — Crushfilms',
   description:
-    'Crush Films is a small, senior production studio building brand films from Merrick, NY.',
+    'Crushfilms is a small, senior production studio building brand films from Merrick, NY.',
 };
 
 const TEAM = [
@@ -200,10 +200,10 @@ export default function AboutPage() {
           <Reveal delay={150}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact/" className="btn btn-primary">
-                Start a project →
+                Start a project
               </Link>
-              <Link href="/work/" className="btn btn-ghost">
-                See the work
+              <Link href="/services/" className="btn btn-ghost">
+                View our services
               </Link>
             </div>
           </Reveal>

@@ -1,4 +1,4 @@
-# Crush Films — merrickrobertmedia.com
+# Crushfilms — merrickrobertmedia.com
 
 A Next.js + Tailwind rebuild of `merrickrobertmedia.com`, leaning into a
 Kode-style production-studio aesthetic: dark, type-led, lean.

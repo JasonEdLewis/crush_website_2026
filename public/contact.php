@@ -1,6 +1,6 @@
 <?php
 /**
- * Crush Films contact intake.
+ * Crushfilms contact intake.
  *
  * Lives next to the static export in public_html/. The contact form posts
  * here; we sanitize, send via the host's mail() transport, and redirect to
@@ -81,7 +81,7 @@ $body .= "IP:        " . ($_SERVER['REMOTE_ADDR']     ?? '-') . "\n";
 $body .= "UA:        " . clean((string)($_SERVER['HTTP_USER_AGENT'] ?? '-')) . "\n";
 
 $headers   = [];
-$headers[] = "From: Crush Films <{$FROM}>";
+$headers[] = "From: Crushfilms <{$FROM}>";
 $headers[] = "Reply-To: {$name} <{$email}>";
 $headers[] = "X-Mailer: crushfilms-contact/1.0";
 $headers[] = "Content-Type: text/plain; charset=UTF-8";
@@ -108,7 +108,7 @@ function fail(string $message): void {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Couldn't send — Crush Films</title>
+  <title>Couldn't send — Crushfilms</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     body { background:#050505; color:#e5e5e5; font-family:-apple-system,system-ui,sans-serif; padding:6rem 1.5rem; max-width:40rem; margin:0 auto; line-height:1.5 }

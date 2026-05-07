@@ -6,9 +6,9 @@ import Parallax from '@/components/Parallax';
 import { WORK } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Work — Crush Films',
+  title: 'Work — Crushfilms',
   description:
-    'Selected commercial, brand, and documentary work from Crush Films / Merrick Robert Media.',
+    'Selected commercial, brand, and documentary work from Crushfilms / Merrick Robert Media.',
 };
 
 export default function WorkPage() {

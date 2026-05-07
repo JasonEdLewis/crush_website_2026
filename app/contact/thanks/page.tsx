@@ -6,7 +6,7 @@ import Parallax from '@/components/Parallax';
 import { SITE } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Brief received — Crush Films',
+  title: 'Brief received — Crushfilms',
   description: `Thanks for the brief. We'll reply within two business days from ${SITE.email}.`,
   robots: { index: false, follow: false },
 };
@@ -43,8 +43,8 @@ export default function ContactThanksPage() {
           </Reveal>
           <Reveal delay={380}>
             <div className="mt-12 flex flex-wrap items-center gap-4">
-              <Link href="/work/" className="btn btn-primary">
-                See the work →
+              <Link href="/services/" className="btn btn-primary">
+                View our services →
               </Link>
               <Link href="/" className="btn btn-ghost">
                 Back to home

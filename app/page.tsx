@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
-import PosterCard from '@/components/PosterCard';
-import VimeoEmbed from '@/components/VimeoEmbed';
+import HeroVimeoEmbed from '@/components/HeroVimeoEmbed';
 import SplitText from '@/components/SplitText';
 import Parallax from '@/components/Parallax';
 import HeroOverlay from '@/components/HeroOverlay';
 import ScrollHint from '@/components/ScrollHint';
-import BrandWall from '@/components/BrandWall';
+import BrandsSection from '@/components/BrandsSection';
 import { SERVICES, WORK, BRANDS, APPROACH, SITE } from '@/lib/content';
 
 export default function HomePage() {
@@ -19,13 +18,11 @@ export default function HomePage() {
           HERO — full-bleed showreel with overlaid title
          ============================================================ */}
       <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-        {/* video as background */}
+        {/* video as background — pauses while a brand video is playing */}
         {reel.vimeoId ? (
-          <VimeoEmbed
+          <HeroVimeoEmbed
             videoId={reel.vimeoId}
             title={`${reel.client} — ${reel.title}`}
-            fill
-            lazy={false}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-crush-500 via-rose-500 to-amber-400" />
@@ -94,87 +91,7 @@ export default function HomePage() {
       {/* ============================================================
           CREDIBILITY WALL — brand grid + framing
          ============================================================ */}
-      <section className="relative overflow-hidden border-t border-white/5 bg-ink-950 py-20 md:py-28">
-        {/* ambient glow backdrop */}
-        <div
-          aria-hidden
-          className="absolute -top-32 left-1/2 h-[28rem] w-[60rem] -translate-x-1/2 rounded-full bg-crush-500/[0.08] blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-8xl px-6 lg:px-10">
-          {/* header */}
-          <div className="mb-12 grid gap-10 md:mb-16 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <p className="h-eyebrow mb-10 flex items-center gap-3">
-                <span className="inline-block h-px w-8 bg-ink-400" aria-hidden />
-                Selected Partners
-              </p>
-              <h2 className="font-display font-bold uppercase tracking-tight text-display-2 text-ink-50">
-                <SplitText className="block">Brands.Trust.</SplitText>
-                <SplitText className="block text-ink-400" delay={250}>
-                  and their story.
-                </SplitText>
-              </h2>
-            </div>
-
-            <div className="flex flex-col justify-end lg:col-span-5 lg:pt-3">
-              <p className="max-w-md text-base text-ink-300 leading-relaxed">
-                A decade of work for teams in healthcare, fashion,
-                hospitality, advocacy, and more.
-              </p>
-            </div>
-          </div>
-
-          {/* brand grid */}
-          <Reveal>
-            <BrandWall brands={BRANDS} />
-          </Reveal>
-
-          {/* footer line / handoff */}
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 text-sm text-ink-400">
-            <p>
-              From founder portraits to fashion week to public-service
-              campaigns.
-            </p>
-            <Link href="/work/" className="link-underline text-ink-200">
-              See the films we made for them →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          FEATURED WORK — autoplay embeds
-         ============================================================ */}
-      <section className="border-t border-white/5 px-6 lg:px-10 py-24 md:py-32">
-        <div className="mx-auto max-w-8xl">
-          <div className="flex items-end justify-between gap-6 mb-12">
-            <div>
-              <p className="h-eyebrow mb-10">Selected Work</p>
-              <h2 className="font-display font-semibold text-display-2 tracking-tightest">
-                <SplitText stagger={70}>Films we&rsquo;re proud of.</SplitText>
-              </h2>
-            </div>
-            <Link href="/work/" className="hidden md:inline-flex link-underline text-sm text-ink-300">
-              View all work →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {WORK.slice(1).map((item, i) => (
-              <Reveal key={item.slug} delay={i * 120}>
-                <PosterCard item={item} size="md" embed />
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-12 md:hidden">
-            <Link href="/work/" className="btn btn-ghost">
-              View all work →
-            </Link>
-          </div>
-        </div>
-      </section>
+      <BrandsSection brands={BRANDS} />
 
       {/* ============================================================
           APPROACH — hidden on mobile (lives on /about/ + /services/)
@@ -243,8 +160,8 @@ export default function HomePage() {
               <Link href="/contact/" className="btn btn-primary">
                 Start a project
               </Link>
-              <Link href="/work/" className="btn btn-ghost">
-                See the work
+              <Link href="/services/" className="btn btn-ghost">
+                View our services
               </Link>
             </div>
           </Reveal>

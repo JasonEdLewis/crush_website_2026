@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { subscribeAudioMuted } from '@/lib/audioMuted';
 
 type Props = {
   /** Numeric Vimeo video id (the digits in vimeo.com/<id>). */
@@ -22,6 +23,12 @@ type Props = {
    * hero backgrounds — the parent must set its own height + position:relative.
    */
   fill?: boolean;
+  /**
+   * When true, sends a Vimeo Player API `pause` message to the iframe. When
+   * flipped back to false, sends `play`. The iframe stays mounted, so
+   * playback resumes from where it was.
+   */
+  paused?: boolean;
 };
 
 /**
@@ -41,9 +48,12 @@ export default function VimeoEmbed({
   className = '',
   lazy = true,
   fill = false,
+  paused = false,
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [mounted, setMounted] = useState(!lazy);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
     if (!lazy || mounted) return;
@@ -67,11 +77,40 @@ export default function VimeoEmbed({
     return () => io.disconnect();
   }, [lazy, mounted]);
 
-  // Autoplay-loop-muted pattern with chrome hidden.
+  // Vimeo Player API: post `pause`/`play` to the iframe when `paused` flips.
+  useEffect(() => {
+    if (!iframeLoaded) return;
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      JSON.stringify({ method: paused ? 'pause' : 'play' }),
+      '*',
+    );
+  }, [paused, iframeLoaded]);
+
+  // Subscribe to the site-wide mute state and forward it to the iframe.
+  // The initial subscribe call fires immediately with the current value, so
+  // the iframe gets the right state as soon as it has loaded.
+  useEffect(() => {
+    if (!iframeLoaded) return;
+    return subscribeAudioMuted((muted) => {
+      const win = iframeRef.current?.contentWindow;
+      if (!win) return;
+      win.postMessage(
+        JSON.stringify({ method: 'setMuted', value: muted }),
+        '*',
+      );
+    });
+  }, [iframeLoaded]);
+
+  // Autoplay-loop-muted pattern with chrome hidden. Note: we deliberately
+  // do NOT use `background=1` here — that forces mute and ignores the
+  // Player API's `setMuted` calls. Building the equivalent param-by-param
+  // keeps the same chrome-hidden look while letting AudioToggle unmute.
   const src =
     `https://player.vimeo.com/video/${videoId}` +
-    `?background=1&autoplay=1&muted=1&loop=1&autopause=0` +
-    `&title=0&byline=0&portrait=0&controls=0&dnt=1`;
+    `?autoplay=1&muted=1&loop=1&autopause=0` +
+    `&title=0&byline=0&portrait=0&controls=0&dnt=1&playsinline=1`;
 
   // Fill (cover) mode: scale iframe up so 16:9 video covers a container of
   // any aspect ratio, like CSS `object-fit: cover`.
@@ -85,12 +124,14 @@ export default function VimeoEmbed({
       <div ref={ref} className={`absolute inset-0 overflow-hidden ${className}`}>
         {mounted ? (
           <iframe
+            ref={iframeRef}
             src={src}
             title={title}
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
             loading="lazy"
             className={fillIframe}
+            onLoad={() => setIframeLoaded(true)}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-ink-800 via-ink-900 to-black" />
@@ -106,12 +147,14 @@ export default function VimeoEmbed({
     >
       {mounted ? (
         <iframe
+          ref={iframeRef}
           src={src}
           title={title}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           loading="lazy"
           className="absolute inset-0 h-full w-full border-0"
+          onLoad={() => setIframeLoaded(true)}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-ink-800 via-ink-900 to-black" />

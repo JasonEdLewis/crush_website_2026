@@ -7,7 +7,7 @@ import VimeoEmbed from '@/components/VimeoEmbed';
 import FaithOfferings from '@/components/FaithOfferings';
 
 export const metadata: Metadata = {
-  title: 'Faith-Based Production — Crush Films',
+  title: 'Faith-Based Production — Crushfilms',
   description:
     'Story-led production for ministries and Christian-based businesses. Retainers, seminars, and faith-driven series — built for churches that take their message seriously.',
 };
@@ -189,8 +189,8 @@ export default function FaithPage() {
               <Link href="/contact/" className="btn btn-primary">
                 Start the conversation →
               </Link>
-              <Link href="/work/" className="btn btn-ghost">
-                See the work
+              <Link href="/services/" className="btn btn-ghost">
+                View our services
               </Link>
             </div>
           </Reveal>

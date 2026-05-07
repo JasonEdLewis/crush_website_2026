@@ -3,18 +3,26 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import SmoothScroll from '@/components/SmoothScroll';
+import AudioToggle from '@/components/AudioToggle';
 
 export const metadata: Metadata = {
-  title: 'Crush Films — Brand films that move people | Merrick Robert Media',
+  title: 'Crushfilms — Brand films that move people | Merrick Robert Media',
   description:
-    'Crush Films is a production studio building bold commercial, brand, and documentary work for ambitious teams. We turn ideas into films people remember.',
+    'Crushfilms is a production studio building bold commercial, brand, and documentary work for ambitious teams. We turn ideas into films people remember.',
   metadataBase: new URL('https://merrickrobertmedia.com'),
   openGraph: {
-    title: 'Crush Films — Brand films that move people',
+    title: 'Crushfilms — Brand films that move people',
     description:
       'A production studio building bold commercial, brand, and documentary work for ambitious teams.',
     type: 'website',
   },
+  // Favicon + apple-touch-icon — both are SVG. Modern browsers (98%+) handle
+  // SVG favicons natively; older Safari falls back to the apple-touch-icon.
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/apple-touch-icon.svg' }],
+  },
+  themeColor: '#0a0a0a',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -39,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main>{children}</main>
         <Footer />
+        <AudioToggle />
       </body>
     </html>
   );
