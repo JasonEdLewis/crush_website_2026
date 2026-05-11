@@ -7,7 +7,7 @@ import VideoServiceRow from '@/components/VideoServiceRow';
 import { SERVICES, APPROACH, type Service } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Services — Crushfilms',
+  title: 'Services — Merrick Robert Media / Crushfilms',
   description:
     'Commercial production, brand films, documentary, content systems, post-production, and live capture.',
 };

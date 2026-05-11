@@ -6,7 +6,7 @@ import Parallax from '@/components/Parallax';
 import { WORK } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Work — Crushfilms',
+  title: 'Work — Merrick Robert Media / Crushfilms',
   description:
     'Selected commercial, brand, and documentary work from Crushfilms / Merrick Robert Media.',
 };
@@ -52,7 +52,7 @@ export default function WorkPage() {
               className="scroll-mt-32"
             >
               <div id={item.slug}>
-                <PosterCard item={item} size={i === 0 ? 'lg' : 'md'} embed />
+                <PosterCard item={item} size={i === 0 ? 'lg' : 'md'} embed localAudio />
               </div>
               <p className="mt-3 text-sm text-ink-400 max-w-md">{item.blurb}</p>
             </Reveal>

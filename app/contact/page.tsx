@@ -6,7 +6,7 @@ import { SITE } from '@/lib/content';
 import SocialIcon, { type SocialKey } from '@/components/SocialIcon';
 
 export const metadata: Metadata = {
-  title: 'Contact — Crushfilms',
+  title: 'Contact — Merrick Robert Media / Crushfilms',
   description: `Start a project with ${SITE.name}. Email ${SITE.email}.`,
 };
 

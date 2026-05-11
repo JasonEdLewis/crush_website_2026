@@ -123,6 +123,11 @@ export type CaseStudy = {
   // OPTIONAL: external watch URL override; when provided, takes precedence
   // over the auto-generated vimeo.com/<id> link.
   watchUrl?: string;
+  // OPTIONAL: when set, PosterCard renders a self-hosted <video> (autoplay,
+  // muted, looped) sourced from this path instead of a Vimeo embed. Takes
+  // precedence over `vimeoId` inside PosterCard; `vimeoId` is still used by
+  // the home-hero `HeroVimeoEmbed`.
+  videoSrc?: string;
 };
 
 /**
@@ -136,15 +141,16 @@ export type CaseStudy = {
 export const WORK: CaseStudy[] = [
   {
     slug: 'reel-2025',
-    client: 'Merrick Robert Media',
-    title: 'The reel.',
-    category: 'Showreel',
+    client: 'Vertstory',
+    title: 'Vertical, finally.',
+    category: 'Brand Platform',
     year: '2025',
     blurb:
-      'A rolling cut of recent commercial, brand, and documentary work. Best watched loud.',
-    accent: 'from-crush-500 via-rose-500 to-amber-400',
-    initials: 'MR',
-    vimeoId: '1139830528',
+      'Short stories, told tall — a vertical-first home for films from the heart, not the studio.',
+    accent: 'from-violet-500 via-fuchsia-500 to-rose-500',
+    initials: 'VS',
+    vimeoId: '1162412597',
+    videoSrc: '/images/verstory_screen_recording.mov',
   },
   {
     slug: 'feature-spot',
@@ -156,7 +162,7 @@ export const WORK: CaseStudy[] = [
       'High-craft commercial work — sharp script, sharper edit, built to land in a feed.',
     accent: 'from-amber-500 via-orange-500 to-rose-500',
     initials: 'CM',
-    vimeoId: '1162422041',
+    vimeoId: '1162422041'
   },
   {
     slug: 'brand-anthem',
@@ -213,8 +219,8 @@ export const BRANDS: Brand[] = [
   { name: 'AARP',                        logo: '/logos/brands/AARP.png' },
   { name: 'Winston-Salem Fashion Week',  logo: '/logos/brands/WSFW.png',              vimeoId: '1162412870' },
   { name: 'The Ayars Agency',            logo: '/logos/brands/AYARS_AGENCY.png',      vimeoId: '1129696793' },
-  { name: 'Color Of Medicine',           logo: '/logos/brands/COLOR_OF_MEDICINE.png' },
-  { name: 'Athora Care',                 logo: '/logos/brands/AUTHORA_CARE.png' },
+  { name: 'Color Of Medicine',           logo: '/logos/brands/COLOR_OF_MEDICINE.png', vimeoId: '1188711217' },
+  { name: 'Athora Care',                 logo: '/logos/brands/AUTHORA_CARE.png',    vimeoId: '1188741405' },
   { name: 'The Elijah Rock Foundation',  logo: '/logos/brands/ELIJAH_FOUNDATION.png' },
   { name: 'Alpha Style',                 logo: '/logos/brands/ALPHA_STYLE.png' },
   { name: "Alzheimer's Association",     logo: '/logos/brands/ALZHEIMERS.png' },

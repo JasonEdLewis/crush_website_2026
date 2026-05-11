@@ -6,7 +6,7 @@ import Parallax from '@/components/Parallax';
 import { STUDIO_FACTS, SITE } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'About — Crushfilms',
+  title: 'About — Merrick Robert Media / Crushfilms',
   description:
     'Crushfilms is a small, senior production studio building brand films from Merrick, NY.',
 };

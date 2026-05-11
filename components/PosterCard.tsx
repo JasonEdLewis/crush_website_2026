@@ -9,6 +9,11 @@ type Props = {
    * When false, renders the gradient/initials poster (no external link).
    */
   embed?: boolean;
+  /**
+   * When true, the embed renders its own per-card mute toggle instead of
+   * subscribing to the site-wide AudioToggle. Used on the Work page.
+   */
+  localAudio?: boolean;
 };
 
 /**
@@ -17,8 +22,33 @@ type Props = {
  *
  * No external "Watch on Vimeo" links or overlays — videos play in place.
  */
-export default function PosterCard({ item, size = 'md', embed = false }: Props) {
+export default function PosterCard({
+  item,
+  size = 'md',
+  embed = false,
+  localAudio = false,
+}: Props) {
   const aspect = size === 'lg' ? 'aspect-cinema' : 'aspect-still';
+
+  if (embed && item.videoSrc) {
+    return (
+      <article>
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-ink-900">
+          <video
+            src={item.videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={`${item.client} — ${item.title}`}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+        <Meta item={item} />
+      </article>
+    );
+  }
 
   if (embed && item.vimeoId) {
     return (
@@ -27,6 +57,7 @@ export default function PosterCard({ item, size = 'md', embed = false }: Props) 
           videoId={item.vimeoId}
           title={`${item.client} — ${item.title}`}
           aspect={size === 'lg' ? 'aspect-cinema' : 'aspect-video'}
+          localAudio={localAudio}
         />
         <Meta item={item} />
       </article>

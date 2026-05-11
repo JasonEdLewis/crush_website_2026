@@ -6,7 +6,7 @@ import Parallax from '@/components/Parallax';
 import { SITE } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Brief received — Crushfilms',
+  title: 'Brief received — Merrick Robert Media / Crushfilms',
   description: `Thanks for the brief. We'll reply within two business days from ${SITE.email}.`,
   robots: { index: false, follow: false },
 };

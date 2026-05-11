@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import {
   getAudioMuted,
   setAudioMuted,
@@ -16,11 +17,16 @@ import {
  *
  * Default state is muted; clicking is the user gesture browsers require to
  * unmute autoplaying videos.
+ *
+ * Hidden on `/work` — that page uses per-card mute buttons instead.
  */
 export default function AudioToggle() {
   const [muted, setMuted] = useState(getAudioMuted());
+  const pathname = usePathname();
 
   useEffect(() => subscribeAudioMuted(setMuted), []);
+
+  if (pathname?.startsWith('/work')) return null;
 
   return (
     <button

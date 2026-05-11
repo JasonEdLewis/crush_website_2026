@@ -6,12 +6,12 @@ import SmoothScroll from '@/components/SmoothScroll';
 import AudioToggle from '@/components/AudioToggle';
 
 export const metadata: Metadata = {
-  title: 'Crushfilms — Brand films that move people | Merrick Robert Media',
+  title: 'Merrick Robert Media / Crushfilms — Brand films that move people',
   description:
     'Crushfilms is a production studio building bold commercial, brand, and documentary work for ambitious teams. We turn ideas into films people remember.',
   metadataBase: new URL('https://merrickrobertmedia.com'),
   openGraph: {
-    title: 'Crushfilms — Brand films that move people',
+    title: 'Merrick Robert Media / Crushfilms — Brand films that move people',
     description:
       'A production studio building bold commercial, brand, and documentary work for ambitious teams.',
     type: 'website',

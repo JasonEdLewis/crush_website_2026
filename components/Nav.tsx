@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { NAV, SITE } from '@/lib/content';
+import { NAV } from '@/lib/content';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -15,13 +15,13 @@ export default function Nav() {
         <Link
           href="/"
           className="flex items-center gap-2 group"
-          aria-label={`${SITE.name} — home`}
+          aria-label="Merrick Robert Media / Crushfilms — home"
         >
           <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-crush-500 transition-transform duration-700 ease-out-quint group-hover:rotate-180">
             <span className="absolute inset-1 rounded-full bg-ink-900" />
           </span>
           <span className="font-display font-semibold text-[1.05rem] tracking-tighter">
-            {SITE.name.toLowerCase()}
+            merrick robert media/ crushfilms
           </span>
         </Link>
 

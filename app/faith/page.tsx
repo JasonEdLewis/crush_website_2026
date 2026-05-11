@@ -7,7 +7,7 @@ import VimeoEmbed from '@/components/VimeoEmbed';
 import FaithOfferings from '@/components/FaithOfferings';
 
 export const metadata: Metadata = {
-  title: 'Faith-Based Production — Crushfilms',
+  title: 'Faith-Based Production — Merrick Robert Media / Crushfilms',
   description:
     'Story-led production for ministries and Christian-based businesses. Retainers, seminars, and faith-driven series — built for churches that take their message seriously.',
 };
