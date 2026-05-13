@@ -1,0 +1,91 @@
+
+<style>
+  .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 1rem 0; }
+  .pkg-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; display: flex; flex-direction: column; gap: 12px; }
+  .pkg-card.featured { border: 2px solid #185FA5; }
+  .badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: var(--border-radius-md); font-weight: 500; margin-bottom: 4px; }
+  .badge-entry { background: #EAF3DE; color: #3B6D11; }
+  .badge-growth { background: #E6F1FB; color: #185FA5; }
+  .badge-featured { background: #E6F1FB; color: #0C447C; }
+  .badge-premium { background: #EEEDFE; color: #3C3489; }
+  .pkg-name { font-size: 17px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+  .pkg-sub { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  .pkg-price { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .pkg-price span { font-size: 13px; font-weight: 400; color: var(--color-text-secondary); }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 4px 0; }
+  .deliverable { font-size: 13px; color: var(--color-text-secondary); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .deliverable i { font-size: 15px; color: #1D9E75; margin-top: 1px; flex-shrink: 0; }
+  .section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; }
+  .cta-btn { margin-top: auto; background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 8px 12px; font-size: 13px; color: var(--color-text-primary); cursor: pointer; text-align: center; }
+  .cta-btn:hover { background: var(--color-background-secondary); }
+  .header-area { margin-bottom: 0.5rem; }
+</style>
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Merrick Robert Media — Three church media packages: entry, growth retainer, and high-end partnership</h2>
+
+<div class="pkg-grid">
+
+  <div class="pkg-card">
+    <div class="header-area">
+      <span class="badge badge-entry">Entry package</span>
+      <p class="pkg-name">The Foundation</p>
+      <p class="pkg-sub">For churches ready to start telling their story on social with professional production.</p>
+    </div>
+    <div class="pkg-price">$1,500–$2,500 <span>/ event or project</span></div>
+    <hr class="divider">
+    <p class="section-label">What's included</p>
+    <div class="deliverable"><i class="ti ti-video" aria-hidden="true"></i>1 church event covered (sermon series launch, revival, anniversary)</div>
+    <div class="deliverable"><i class="ti ti-brand-instagram" aria-hidden="true"></i>4–6 vertical reels cut for Instagram & TikTok</div>
+    <div class="deliverable"><i class="ti ti-cut" aria-hidden="true"></i>1 highlight film (3–5 min) for YouTube/website</div>
+    <div class="deliverable"><i class="ti ti-user" aria-hidden="true"></i>1 pastor profile clip — 60–90 sec "who am I" brand film</div>
+    <div class="deliverable"><i class="ti ti-photo" aria-hidden="true"></i>Same-day BTS stills for social</div>
+    <hr class="divider">
+    <p class="section-label">Ideal for</p>
+    <div class="deliverable"><i class="ti ti-check" aria-hidden="true"></i>Churches with 100–500 members just building their online presence</div>
+    <button class="cta-btn" onclick="sendPrompt('Write me a cold pitch email for the Foundation package targeting a small growing church')">Draft pitch email ↗</button>
+  </div>
+
+  <div class="pkg-card featured">
+    <div class="header-area">
+      <span class="badge badge-featured">Most popular</span>
+      <span class="badge badge-growth" style="margin-left:6px;">Growth retainer</span>
+      <p class="pkg-name">The Momentum Retainer</p>
+      <p class="pkg-sub">Monthly production partner — we handle the content engine so the church can focus on ministry.</p>
+    </div>
+    <div class="pkg-price">$3,500–$6,000 <span>/ month</span></div>
+    <hr class="divider">
+    <p class="section-label">Monthly deliverables</p>
+    <div class="deliverable"><i class="ti ti-microphone" aria-hidden="true"></i>4 sermon recap reels (one per Sunday)</div>
+    <div class="deliverable"><i class="ti ti-calendar-event" aria-hidden="true"></i>Full coverage of 1–2 church events/month</div>
+    <div class="deliverable"><i class="ti ti-user-check" aria-hidden="true"></i>2 pastor-brand content pieces (teaching clip, "behind the vision" moment)</div>
+    <div class="deliverable"><i class="ti ti-device-tv" aria-hidden="true"></i>1 monthly mini-doc or testimony story (2–4 min)</div>
+    <div class="deliverable"><i class="ti ti-chart-bar" aria-hidden="true"></i>Monthly content calendar + caption strategy</div>
+    <div class="deliverable"><i class="ti ti-refresh" aria-hidden="true"></i>Thumbnail + cover art refreshes each series</div>
+    <hr class="divider">
+    <p class="section-label">Growth levers</p>
+    <div class="deliverable"><i class="ti ti-trending-up" aria-hidden="true"></i>Replicates the Elevation/Highlands content-to-growth model</div>
+    <button class="cta-btn" onclick="sendPrompt('Write me a 3-month growth retainer pitch deck outline for a mid-size church')">Draft pitch deck outline ↗</button>
+  </div>
+
+  <div class="pkg-card">
+    <div class="header-area">
+      <span class="badge badge-premium">High-end partnership</span>
+      <p class="pkg-name">The Legacy Series</p>
+      <p class="pkg-sub">A full media partnership built around a documentary series that grows the pastor's platform and puts the church on the map nationally.</p>
+    </div>
+    <div class="pkg-price">$12,000–$25,000 <span>/ series or annual</span></div>
+    <hr class="divider">
+    <p class="section-label">What's included</p>
+    <div class="deliverable"><i class="ti ti-movie" aria-hidden="true"></i>4–6 episode original documentary or interview series (YouTube-first)</div>
+    <div class="deliverable"><i class="ti ti-brand-youtube" aria-hidden="true"></i>Full series development, shoot days, edit pipeline, distribution strategy</div>
+    <div class="deliverable"><i class="ti ti-file-description" aria-hidden="true"></i>Sponsor & partner deck built to offset production cost</div>
+    <div class="deliverable"><i class="ti ti-crown" aria-hidden="true"></i>Pastor brand identity film (5–8 min cinematic profile)</div>
+    <div class="deliverable"><i class="ti ti-news" aria-hidden="true"></i>Press kit + media assets for outreach, speaking invites, book deals</div>
+    <div class="deliverable"><i class="ti ti-antenna" aria-hidden="true"></i>Full retainer content throughout the series run</div>
+    <hr class="divider">
+    <p class="section-label">Outcome</p>
+    <div class="deliverable"><i class="ti ti-world" aria-hidden="true"></i>National brand visibility — positions pastor for speaking circuit, media</div>
+    <button class="cta-btn" onclick="sendPrompt('Give me a documentary series concept I can pitch to a pastor who wants to grow their national platform')">Generate series concept ↗</button>
+  </div>
+
+</div>
