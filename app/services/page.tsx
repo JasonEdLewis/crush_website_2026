@@ -52,7 +52,7 @@ export default function ServicesPage() {
       <section className="px-6 lg:px-10 py-12 md:py-20">
         <div className="mx-auto max-w-8xl divide-y divide-white/5 border-y border-white/5">
           {SERVICES.map((s, i) =>
-            s.vimeoId ? (
+            s.vimeoId || s.imageSrc ? (
               <VideoServiceRow key={s.number} service={s} index={i} />
             ) : (
               <TextServiceRow key={s.number} service={s} index={i} />

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import Parallax from '@/components/Parallax';
+import VimeoEmbed from '@/components/VimeoEmbed';
 import { STUDIO_FACTS, SITE } from '@/lib/content';
 
 export const metadata: Metadata = {
@@ -51,23 +52,41 @@ const PRINCIPLES = [
 export default function AboutPage() {
   return (
     <>
-      {/* page header */}
-      <section className="relative overflow-hidden noise pt-32 md:pt-40 pb-16 border-b border-white/5">
-        <div className="grid-bg absolute inset-0 opacity-50" aria-hidden />
-        <div className="relative mx-auto max-w-8xl px-6 lg:px-10">
-          <Reveal>
-            <p className="h-eyebrow mb-8 flex items-center gap-3">
-              <span className="inline-block h-px w-8 bg-ink-400" />
-              About the Studio
-            </p>
-          </Reveal>
-          <Parallax speed={-0.1}>
-            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-6xl">
+      {/* page header — full-bleed showreel with overlaid title */}
+      <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden border-b border-white/5">
+        <VimeoEmbed
+          videoId="1191043448"
+          title="About — Crushfilms"
+          fill
+          lazy={false}
+        />
+
+        {/* readability overlays */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-ink-950/60 via-transparent to-ink-950/85"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-ink-950/10 to-transparent"
+          aria-hidden
+        />
+        <div className="noise absolute inset-0" aria-hidden />
+
+        {/* hero text overlay */}
+        <div className="absolute inset-x-0 bottom-0 z-10 px-6 lg:px-10 pb-12 md:pb-16">
+          <Parallax speed={-0.1} className="mx-auto max-w-8xl">
+            <Reveal>
+              <p className="h-eyebrow mb-8 flex items-center gap-3 text-ink-50/70">
+                <span className="inline-block h-px w-8 bg-ink-50/50" />
+                About the Studio
+              </p>
+            </Reveal>
+            <h1 className="font-display font-semibold text-display-1 tracking-tightest max-w-6xl text-ink-50">
               <SplitText immediate delay={120} stagger={60}>
-                We make films like a product team —
+                From Vision to Visual,
               </SplitText>{' '}
-              <SplitText immediate delay={520} stagger={60} className="text-ink-400">
-                tight loops, sharp delivery, no fluff.
+              <SplitText immediate delay={520} stagger={60} className="text-ink-300">
+                one story at a time.
               </SplitText>
             </h1>
           </Parallax>

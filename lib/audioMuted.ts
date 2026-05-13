@@ -29,3 +29,11 @@ export function subscribeAudioMuted(fn: (muted: boolean) => void) {
     subscribers.delete(fn);
   };
 }
+
+/** Re-fire the current mute state to all subscribers. Used to retry an
+ *  unmute that was blocked by browser autoplay policy on initial load —
+ *  after the first user gesture, posting `setMuted: false` again will
+ *  actually engage. */
+export function notifyAudioMuted() {
+  subscribers.forEach((fn) => fn(muted));
+}

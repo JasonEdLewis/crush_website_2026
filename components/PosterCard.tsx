@@ -97,9 +97,6 @@ export default function PosterCard({
           <span className="rounded-full bg-ink-950/60 backdrop-blur px-3 py-1">
             {item.category}
           </span>
-          <span className="rounded-full bg-ink-950/60 backdrop-blur px-3 py-1">
-            {item.year}
-          </span>
         </div>
       </div>
       <Meta item={item} />
@@ -114,7 +111,7 @@ function Meta({ item }: { item: CaseStudy }) {
         {item.title}
       </p>
       <p className="text-sm text-ink-400 mt-1">
-        {item.client} · {item.category} · {item.year}
+        {item.client} · {item.category}
       </p>
     </div>
   );

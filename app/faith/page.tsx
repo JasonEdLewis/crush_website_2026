@@ -3,8 +3,9 @@ import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import SplitText from '@/components/SplitText';
 import Parallax from '@/components/Parallax';
-import VimeoEmbed from '@/components/VimeoEmbed';
+import FaithHero from '@/components/FaithHero';
 import FaithOfferings from '@/components/FaithOfferings';
+import FaithPackages from '@/components/FaithPackages';
 
 export const metadata: Metadata = {
   title: 'Faith-Based Production — Merrick Robert Media / Crushfilms',
@@ -25,6 +26,8 @@ const OFFERINGS = [
       'Donor & vision films',
       'Multi-cam capture',
     ],
+  
+    vimeoId: '1162416788',
   },
   {
     number: '02',
@@ -38,6 +41,7 @@ const OFFERINGS = [
       'Team workshop format',
       'On-site or virtual',
     ],
+    vimeoId: '1191041775',
   },
   {
     number: '03',
@@ -51,6 +55,7 @@ const OFFERINGS = [
       'Sponsor & partner decks',
       'Episodic post pipeline',
     ],
+    vimeoId: '1191372487',
   },
 ];
 
@@ -78,13 +83,11 @@ export default function FaithPage() {
     <>
       {/* page header */}
       <section className="relative overflow-hidden noise pt-32 md:pt-40 pb-16 border-b border-white/5">
-        {/* full-bleed background video */}
-        <VimeoEmbed
+        {/* full-bleed background video — mutes when a card row below
+            claims the hover-active audio slot. */}
+        <FaithHero
           videoId="1130023662"
           title="Faith-Based Production reel"
-          fill
-          lazy={false}
-          className="z-0"
         />
         {/* darkening + brand wash so the headline stays readable */}
         <div className="absolute inset-0 z-10 bg-ink-950/70" aria-hidden />
@@ -126,6 +129,11 @@ export default function FaithPage() {
       {/* offerings */}
       <section className="px-6 lg:px-10 py-12 md:py-20">
         <FaithOfferings offerings={OFFERINGS} />
+      </section>
+
+      {/* packages */}
+      <section id="packages" className="border-t border-white/5 px-6 lg:px-10 py-24 md:py-32 scroll-mt-24">
+        <FaithPackages />
       </section>
 
       {/* principles */}

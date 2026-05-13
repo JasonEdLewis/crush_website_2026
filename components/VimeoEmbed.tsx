@@ -37,6 +37,12 @@ type Props = {
    * (single-active-audio coordination via `lib/activeAudio`).
    */
   localAudio?: boolean;
+  /**
+   * Explicit mute override. When defined, takes precedence over both the
+   * site-wide AudioToggle and `localAudio` subscriptions — the parent owns
+   * mute state (e.g. hover-to-unmute on the services page).
+   */
+  muted?: boolean;
 };
 
 /**
@@ -58,6 +64,7 @@ export default function VimeoEmbed({
   fill = false,
   paused = false,
   localAudio = false,
+  muted,
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
@@ -101,39 +108,52 @@ export default function VimeoEmbed({
     );
   }, [paused, iframeLoaded]);
 
+  const hasMutedOverride = muted !== undefined;
+
+  // Parent-controlled mute override (e.g. hover-to-unmute on services page).
+  useEffect(() => {
+    if (!iframeLoaded || !hasMutedOverride) return;
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      JSON.stringify({ method: 'setMuted', value: muted }),
+      '*',
+    );
+  }, [iframeLoaded, hasMutedOverride, muted]);
+
   // Site-wide mute subscription (only in shared-audio mode).
   // The initial subscribe call fires immediately with the current value, so
   // the iframe gets the right state as soon as it has loaded.
   useEffect(() => {
-    if (!iframeLoaded || localAudio) return;
-    return subscribeAudioMuted((muted) => {
+    if (!iframeLoaded || localAudio || hasMutedOverride) return;
+    return subscribeAudioMuted((m) => {
       const win = iframeRef.current?.contentWindow;
       if (!win) return;
       win.postMessage(
-        JSON.stringify({ method: 'setMuted', value: muted }),
+        JSON.stringify({ method: 'setMuted', value: m }),
         '*',
       );
     });
-  }, [iframeLoaded, localAudio]);
+  }, [iframeLoaded, localAudio, hasMutedOverride]);
 
   // Local mute mode: another card claiming audio mutes this one.
   useEffect(() => {
-    if (!localAudio) return;
+    if (!localAudio || hasMutedOverride) return;
     return subscribeActiveAudio((id) => {
       if (id !== instanceId) setLocalMuted(true);
     });
-  }, [localAudio, instanceId]);
+  }, [localAudio, instanceId, hasMutedOverride]);
 
   // Local mute mode: push current mute state to the iframe.
   useEffect(() => {
-    if (!iframeLoaded || !localAudio) return;
+    if (!iframeLoaded || !localAudio || hasMutedOverride) return;
     const win = iframeRef.current?.contentWindow;
     if (!win) return;
     win.postMessage(
       JSON.stringify({ method: 'setMuted', value: localMuted }),
       '*',
     );
-  }, [localAudio, localMuted, iframeLoaded]);
+  }, [localAudio, localMuted, iframeLoaded, hasMutedOverride]);
 
   // Autoplay-loop-muted pattern with chrome hidden. Note: we deliberately
   // do NOT use `background=1` here — that forces mute and ignores the

@@ -52,6 +52,26 @@ $service = $_POST['service'] ?? [];
 if (!is_array($service)) $service = [$service];
 $service = array_values(array_filter(array_map('clean', array_map('strval', $service))));
 
+// Collect any additional fields posted by tailored intake forms (e.g. the
+// per-package /faith/inquire/<slug>/ pages). We render them in a generic
+// "Additional details" section so the PHP doesn't need to know each form's
+// schema up front. Known fields above are skipped.
+$KNOWN_FIELDS = ['name','email','company','budget','brief','service','website'];
+$extras = [];
+foreach ($_POST as $key => $val) {
+    if (in_array($key, $KNOWN_FIELDS, true)) continue;
+    if (is_array($val)) {
+        $val = implode(', ', array_map('strval', $val));
+    } else {
+        $val = (string)$val;
+    }
+    // Allow newlines for textarea answers but strip header-injection chars
+    // from the field name; values get rendered as a plain text body.
+    $val = str_replace(["\r"], '', $val);
+    if (trim($val) === '') continue;
+    $extras[clean((string)$key)] = $val;
+}
+
 // --- 4. validate ----------------------------------------------------------
 
 $errors = [];
@@ -65,7 +85,12 @@ if ($errors) {
 
 // --- 5. compose -----------------------------------------------------------
 
-$subject = "New brief from {$name}" . ($company !== '' ? " ({$company})" : '');
+// Per-package inquiry submissions tag the subject with the package name so
+// the inbox makes the intent obvious at a glance.
+$package = isset($extras['package']) ? clean($extras['package']) : '';
+$subject = $package !== ''
+    ? "Faith inquiry — {$package} — {$name}"
+    : ("New brief from {$name}" . ($company !== '' ? " ({$company})" : ''));
 
 $body  = "New brief submitted via crushfilms.com\n";
 $body .= str_repeat('-', 56) . "\n\n";
@@ -75,6 +100,20 @@ if ($company !== '') $body .= "Company:  {$company}\n";
 if ($budget  !== '') $body .= "Budget:   {$budget}\n";
 if ($service)        $body .= "Services: " . implode(', ', $service) . "\n";
 $body .= "\nBrief:\n{$brief}\n\n";
+if ($extras) {
+    $body .= "Additional details:\n";
+    foreach ($extras as $key => $val) {
+        $label = ucwords(str_replace('_', ' ', $key));
+        // Indent multi-line answers so they read clearly.
+        $lines = explode("\n", $val);
+        $first = array_shift($lines);
+        $body .= sprintf("  %-22s %s\n", $label . ':', $first);
+        foreach ($lines as $line) {
+            $body .= str_repeat(' ', 25) . $line . "\n";
+        }
+    }
+    $body .= "\n";
+}
 $body .= str_repeat('-', 56) . "\n";
 $body .= "Submitted: " . gmdate('c') . "\n";
 $body .= "IP:        " . ($_SERVER['REMOTE_ADDR']     ?? '-') . "\n";

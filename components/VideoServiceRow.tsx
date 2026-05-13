@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Reveal from './Reveal';
 import VimeoEmbed from './VimeoEmbed';
+import { subscribeAudioMuted } from '@/lib/audioMuted';
+import { setHoverActive } from '@/lib/hoverAudio';
 import type { Service } from '@/lib/content';
 
 /* ---------------------------------------------------------------------------
@@ -65,6 +67,21 @@ export default function VideoServiceRow({
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [siteMuted, setSiteMuted] = useState(true);
+
+  // Site-wide AudioToggle is the master gate — hover only unmutes if the
+  // global toggle is also unmuted.
+  useEffect(() => subscribeAudioMuted(setSiteMuted), []);
+
+  // Claim the hover-active audio slot whenever this row owns the spotlight,
+  // so page-level background videos can mute themselves.
+  useEffect(() => {
+    if (hovered || active) {
+      setHoverActive(s.number);
+      return () => setHoverActive(null);
+    }
+  }, [hovered, active, s.number]);
 
   useEffect(() => {
     const el = ref.current;
@@ -93,18 +110,32 @@ export default function VideoServiceRow({
       <div
         ref={ref}
         data-active={active || undefined}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         className="group relative overflow-hidden hover:bg-white/[0.02] transition-colors px-2 md:px-4"
       >
-        {/* video + gradient — revealed on hover/active */}
+        {/* media + gradient — revealed on hover/active.
+            Image takes precedence over video when both are set. */}
         <div
           className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 group-data-[active]:opacity-100 transition-opacity duration-700 pointer-events-none"
           aria-hidden
         >
-          <VimeoEmbed
-            videoId={s.vimeoId!}
-            title={`${s.title} — preview`}
-            fill
-          />
+          {s.imageSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={s.imageSrc}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <VimeoEmbed
+              videoId={s.vimeoId!}
+              title={`${s.title} — preview`}
+              fill
+              muted={siteMuted || !(hovered || active)}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-ink-950/20 to-transparent" />
           <div className="noise absolute inset-0" />
         </div>

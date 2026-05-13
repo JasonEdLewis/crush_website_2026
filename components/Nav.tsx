@@ -21,7 +21,7 @@ export default function Nav() {
             <span className="absolute inset-1 rounded-full bg-ink-900" />
           </span>
           <span className="font-display font-semibold text-[1.05rem] tracking-tighter">
-            merrick robert media/ crushfilms
+            merrick robert media / crushfilms
           </span>
         </Link>
 
